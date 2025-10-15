@@ -45,7 +45,7 @@ function Projects() {
         );
     }
 
-    const filteredProjects = projects.filter((p) => p.type === filter);
+    const filteredProjects = (projects || []).filter(p => p.attributes.type === filter);
 
     return (
         <>
