@@ -205,16 +205,16 @@ function Home() {
           </div>
         </div>
 
-        <div className='layout-section playground'>
-          <Link to="/playground">
+        <Link to="/playground" className='playground-link--homepage'>
+          <div className='layout-section playground'>
             <img className='full-width-img' src={playground} alt="" />
             <div className='playground-text'>
               <span>playground</span>
               <p>“Creative place where my visions and ideas come together”</p>
               <img src={whitearrow} alt="arrow svg" />
             </div>
-          </Link>
-        </div>
+          </div>
+        </Link>
 
         <Footer />
       </div>
