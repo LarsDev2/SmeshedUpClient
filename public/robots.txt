@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+# Tell search engines where the sitemap is
+Sitemap: https://smeshedup.studio/sitemap.xml
