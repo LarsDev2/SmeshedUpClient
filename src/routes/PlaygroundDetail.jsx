@@ -129,7 +129,7 @@ export default function PlaygroundDetail() {
                             <>
                                 <p className="subtitle">Info</p>
                                 <p className="project-text">
-                                    {playground.info.split("\n").map((line, i) => (
+                                    {playground.info.split(/\r?\n/).map((line, i) => (
                                         <span key={i}>
                                             {line}
                                             <br />

@@ -132,7 +132,7 @@ export default function ProjectDetail() {
                                 <>
                                     <p className="subtitle">Briefing</p>
                                     <p className="project-text">
-                                        {project.briefing.split("\n").map((line, i) => <span key={i}>{line}<br /></span>)}
+                                        {project.briefing.split(/\r?\n/).map((line, i) => <span key={i}>{line}<br /></span>)}
                                     </p>
                                 </>
                             )}
@@ -140,7 +140,7 @@ export default function ProjectDetail() {
                                 <>
                                     <p className="subtitle">Info</p>
                                     <p className="project-text">
-                                        {project.info.split("\n").map((line, i) => <span key={i}>{line}<br /></span>)}
+                                        {project.info.split(/\r?\n/).map((line, i) => <span key={i}>{line}<br /></span>)}
                                     </p>
                                 </>
                             )}
