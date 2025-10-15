@@ -122,30 +122,29 @@ export default function PlaygroundDetail() {
 
                     {/* Text & Media */}
                     <div className="first-text">
-                        <h6>{firstPart} <span className="h6-highlight">{lastWord}</span></h6>
-                        <p className="description">{playground.description}</p>
-
-                        {playground.info && (
-                            <>
-                                <p className="subtitle">Info</p>
-                                <p className="project-text">
-                                    {playground.info.split(/\r?\n/).map((line, i) => (
-                                        <span key={i}>
-                                            {line}
-                                            <br />
-                                        </span>
-                                    ))}
-                                </p>
-                            </>
-                        )}
-
-                        {playground.note && <p className="note">{playground.note}</p>}
-
-                        <ul className="links-list">
-                            {playground.figmalink && <li><a href={playground.figmalink} target="_blank"><ion-icon name="logo-figma"></ion-icon></a></li>}
-                            {playground.websitelink && <li><a href={playground.websitelink} target="_blank"><ion-icon name="globe-outline"></ion-icon></a></li>}
-                            {playground.externlink && <li><a href={playground.externlink} target="_blank"><ion-icon name="link-outline"></ion-icon></a></li>}
-                        </ul>
+                        <div>
+                            <h6>{firstPart} <span className="h6-highlight">{lastWord}</span></h6>
+                            <p className="description">{playground.description}</p>
+                            {playground.info && (
+                                <>
+                                    <p className="subtitle">Info</p>
+                                    <p className="project-text">
+                                        {playground.info.split(/\r?\n/).map((line, i) => (
+                                            <span key={i}>
+                                                {line}
+                                                <br />
+                                            </span>
+                                        ))}
+                                    </p>
+                                </>
+                            )}
+                            {playground.note && <p className="note">{playground.note}</p>}
+                            <ul className="links-list">
+                                {playground.figmalink && <li><a href={playground.figmalink} target="_blank"><ion-icon name="logo-figma"></ion-icon></a></li>}
+                                {playground.websitelink && <li><a href={playground.websitelink} target="_blank"><ion-icon name="globe-outline"></ion-icon></a></li>}
+                                {playground.externlink && <li><a href={playground.externlink} target="_blank"><ion-icon name="link-outline"></ion-icon></a></li>}
+                            </ul>
+                        </div>
 
                         {/* Media Gallery */}
                         <div className="media-gallery">
