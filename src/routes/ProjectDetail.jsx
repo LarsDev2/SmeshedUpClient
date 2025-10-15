@@ -50,6 +50,39 @@ export default function ProjectDetail() {
         (m) => m.mime.startsWith("image/") || m.mime === "video/mp4"
     );
 
+    const handleShare = async () => {
+        const pageUrl = window.location.href;
+
+        const shareData = {
+            title: project.name,
+            text: project.description || "Check out this project!",
+            url: pageUrl,
+        };
+
+        try {
+            if (navigator.share) {
+                // ✅ Native share dialog (mobile/modern browsers)
+                await navigator.share(shareData);
+            } else if (navigator.clipboard && window.isSecureContext) {
+                // ✅ Copy to clipboard if secure context
+                await navigator.clipboard.writeText(pageUrl);
+                alert("Link copied to clipboard!");
+            } else {
+                // ✅ Last fallback: create temp input element
+                const textArea = document.createElement("textarea");
+                textArea.value = pageUrl;
+                document.body.appendChild(textArea);
+                textArea.select();
+                document.execCommand("copy");
+                document.body.removeChild(textArea);
+                alert("Link copied to clipboard!");
+            }
+        } catch (err) {
+            console.error("Error sharing:", err);
+            alert("Sharing failed. Please copy the link manually.");
+        }
+    };
+
     return (
         <>
             <NavbarLight />
@@ -82,6 +115,10 @@ export default function ProjectDetail() {
                         <div className="top-actions">
                             <button className="back-btn" onClick={() => navigate(-1)}>
                                 <ion-icon name="chevron-back-outline"></ion-icon>
+                            </button>
+
+                            <button className="share-btn" onClick={handleShare}>
+                                <ion-icon name="share-outline"></ion-icon>
                             </button>
                         </div>
                     </div>
