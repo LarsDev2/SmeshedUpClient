@@ -140,9 +140,9 @@ export default function PlaygroundDetail() {
                             )}
                             {playground.note && <p className="note">{playground.note}</p>}
                             <ul className="links-list">
-                                {playground.figmalink && <li><a href={playground.figmalink} target="_blank"><ion-icon name="logo-figma"></ion-icon></a></li>}
-                                {playground.websitelink && <li><a href={playground.websitelink} target="_blank"><ion-icon name="globe-outline"></ion-icon></a></li>}
-                                {playground.externlink && <li><a href={playground.externlink} target="_blank"><ion-icon name="link-outline"></ion-icon></a></li>}
+                                {playground.figmalink && <li><a href={playground.figmalink} target="_blank"><ion-icon name="logo-figma" style={{ color: "#1B1E35", fontSize: "45px" }}></ion-icon></a></li>}
+                                {playground.websitelink && <li><a href={playground.websitelink} target="_blank"><ion-icon name="globe-outline" style={{ color: "#1B1E35", fontSize: "45px" }}></ion-icon></a></li>}
+                                {playground.externlink && <li><a href={playground.externlink} target="_blank"><ion-icon name="link-outline" style={{ color: "#1B1E35", fontSize: "45px" }}></ion-icon></a></li>}
                             </ul>
                         </div>
 
