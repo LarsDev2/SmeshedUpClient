@@ -200,10 +200,9 @@ function About() {
                     <p>My name is Lars, and I’m a 20 year old Belgian student at <span className="bold">Devine</span>.<br /><br />
                         My hobbies are travelling, football, skiing and listening to music. Especially “drum and bass”, it’s a lifestyle.</p>
                     <img className="line-element--about" src={line} alt="svg line element" />
-                    <button className='primary'><Link className='Link-secondary' to="/Projects/street-soccer-event">Let's chat</Link><img src={arrow} alt="Arrow svg." /></button>
+                    <button className='primary'><Link className='Link-secondary letschat-button' to="https://www.instagram.com/smeshedup/">Let's chat<img src={arrow} alt="Arrow svg." /></Link></button>
                 </div>
 
-                {/* Skillset Section */}
                 <div className="about-skillset--wrapper">
                     <h3><span>skill</span> set</h3>
                     {skillCategories.map((category) => (

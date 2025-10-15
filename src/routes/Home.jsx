@@ -127,7 +127,7 @@ function Home() {
               <p className='contact-company'>A.K.A. SmeshedUp</p>
             </div>
           </div>
-          <button className='primary contact-button--home'>Let's chat <img src={arrow} alt="arrow svg" /> </button>
+          <button className='primary contact-button--home'><Link className='letschat-button' to="https://www.instagram.com/smeshedup/">Let's chat <img src={arrow} alt="arrow svg" /></Link> </button>
         </div>
       </div>
 

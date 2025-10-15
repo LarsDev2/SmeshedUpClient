@@ -52,7 +52,7 @@ function Navbar() {
 
             <input id='menu' type='checkbox' checked={active} readOnly />
             <p className='navbar-middletext'><span className='bold-nav--light'>Lars Pieters</span> X <span className='bold-nav--medium'>SMESHEDUP</span></p>
-            <button className='primary navbar-button'>Let's chat <img src={arrow} alt="arrow svg" /> </button>
+            <button className='primary navbar-button'><Link to="https://www.instagram.com/smeshedup/" className='letschat-button'>Let's chat <img src={arrow} alt="arrow svg" /> </Link></button>
 
 
             <ul className={`menu-links ${active ? "open" : ""}`}>
