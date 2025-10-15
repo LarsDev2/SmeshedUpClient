@@ -52,7 +52,7 @@ function PlaygroundList({ playgrounds }) {
           `}
                 >
                     <Link
-                        to={`/Playground/${playground.slug}`}
+                        to={`/playground/${playground.slug}`}
                         className="block h-full"
                         onMouseEnter={() => setHoveredIndex(i)}
                         onMouseLeave={() => setHoveredIndex(null)}
