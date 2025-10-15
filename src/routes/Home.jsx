@@ -23,33 +23,38 @@ function Home() {
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    const startTime = Date.now()
+    const startTime = Date.now();
 
     // Preload all images
-    const images = [img, img2, avatar, line, externlink, playground, whitearrow, imgfallback]
-    let loadedCount = 0
+    const images = [img, img2, avatar, line, externlink, playground, whitearrow, imgfallback];
+    let loadedCount = 0;
 
     images.forEach((src) => {
-      const image = new Image()
-      image.src = src
+      const image = new Image();
+      image.src = src;
       image.onload = image.onerror = () => {
-        loadedCount++
+        loadedCount++;
         if (loadedCount === images.length) {
-          const elapsed = Date.now() - startTime
-          const remaining = Math.max(1500 - elapsed, 0) // ensure 1s minimum
-          setTimeout(() => setLoading(false), remaining)
+          const elapsed = Date.now() - startTime;
+          const remaining = Math.max(1500 - elapsed, 0); // ensure 1.5s minimum load
+          setTimeout(() => setLoading(false), remaining);
         }
-      }
-    })
+      };
+    });
 
-    const video = document.createElement('video')
-    video.src = finalrenderios
-    video.onloadeddata = () => {
-    }
+    const video = document.createElement('video');
+    video.src = finalrenderios;
+    video.onloadeddata = () => { };
 
+  }, []); // 🔹 Preload effect runs only once
+
+  // 🔹 Run GSAP animations only after loading is finished
+  useEffect(() => {
+    if (loading) return; // prevents GSAP from running before DOM is ready
 
     const ctx = gsap.context(() => {
 
+      // --- Testimonials animation ---
       gsap.set(".card-testimonial", { y: "10vh", opacity: 0 });
       gsap.to(".card-testimonial", {
         y: 0,
@@ -60,41 +65,44 @@ function Home() {
           trigger: ".testimonial-wrapper",
           start: "top 50%",
           toggleActions: "play none none reverse",
-        }
+        },
       });
-    });
 
-    gsap.utils.toArray("h3").forEach((el) => {
-      gsap.from(el, {
-        y: "5vh",
-        opacity: 0,
-        duration: 1,
+      // --- Animate h3 headings ---
+      gsap.utils.toArray("h3").forEach((el) => {
+        gsap.from(el, {
+          y: "5vh",
+          opacity: 0,
+          duration: 1,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: el,
+            start: "top 80%",
+            toggleActions: "play none none reverse",
+            immediateRender: false,
+          },
+        });
+      });
+
+      // --- Latest project grid animation ---
+      gsap.set(".latest-project--grid", { y: "10vh", opacity: 0 });
+      gsap.to(".latest-project--grid", {
+        y: 0,
+        opacity: 1,
+        duration: 1.2,
         ease: "power3.out",
         scrollTrigger: {
-          trigger: el,
+          trigger: ".latest-project--grid",
           start: "top 80%",
           toggleActions: "play none none reverse",
-          immediateRender: false,
-        }
+        },
       });
+
     });
 
-    gsap.set(".latest-project--grid", { y: "10vh", opacity: 0 });
-    gsap.to(".latest-project--grid", {
-      y: 0,
-      opacity: 1,
-      duration: 1.2,
-      ease: "power3.out",
-      scrollTrigger: {
-        trigger: ".latest-project--grid", // animate when this section enters viewport
-        start: "top 80%",                 // adjust as needed
-        toggleActions: "play none none reverse",
-      }
-    });
+    return () => ctx.revert(); // cleanup GSAP context when component unmounts
 
-    return () => ctx.revert(); // cleanup
-
-  }, [])
+  }, [loading]);
 
   if (loading) {
     return (
