@@ -6,7 +6,7 @@
     grid-auto-rows: 220px;
     grid-auto-flow: dense;
     width: 100%;
-    padding: 2rem;
+    padding: 0rem;
     box-sizing: border-box;
 }
 
@@ -31,4 +31,10 @@
 .project-grid-item {
     transform: scale(1);
     transition: transform 0.3s ease;
+}
+
+@media (min-width:768px) {
+    .project-grid {
+        padding: 2rem;
+    }
 }
