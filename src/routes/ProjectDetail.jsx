@@ -125,34 +125,32 @@ export default function ProjectDetail() {
 
                     {/* Text & Media */}
                     <div className="first-text">
-                        <h6>{firstPart} <span className="h6-highlight">{lastWord}</span></h6>
-                        <p className="description">{project.description}</p>
-
-                        {project.briefing && (
-                            <>
-                                <p className="subtitle">Briefing</p>
-                                <p className="project-text">
-                                    {project.briefing.split("\n").map((line, i) => <span key={i}>{line}<br /></span>)}
-                                </p>
-                            </>
-                        )}
-
-                        {project.info && (
-                            <>
-                                <p className="subtitle">Info</p>
-                                <p className="project-text">
-                                    {project.info.split("\n").map((line, i) => <span key={i}>{line}<br /></span>)}
-                                </p>
-                            </>
-                        )}
-
-                        {project.note && <p className="note">{project.note}</p>}
-
-                        <ul className="links-list">
-                            {project.figmalink && <li><a href={project.figmalink} target="_blank"><ion-icon name="logo-figma"></ion-icon></a></li>}
-                            {project.websitelink && <li><a href={project.websitelink} target="_blank"><ion-icon name="globe-outline"></ion-icon></a></li>}
-                            {project.externlink && <li><a href={project.externlink} target="_blank"><ion-icon name="link-outline"></ion-icon></a></li>}
-                        </ul>
+                        <div>
+                            <h6>{firstPart} <span className="h6-highlight">{lastWord}</span></h6>
+                            <p className="description">{project.description}</p>
+                            {project.briefing && (
+                                <>
+                                    <p className="subtitle">Briefing</p>
+                                    <p className="project-text">
+                                        {project.briefing.split("\n").map((line, i) => <span key={i}>{line}<br /></span>)}
+                                    </p>
+                                </>
+                            )}
+                            {project.info && (
+                                <>
+                                    <p className="subtitle">Info</p>
+                                    <p className="project-text">
+                                        {project.info.split("\n").map((line, i) => <span key={i}>{line}<br /></span>)}
+                                    </p>
+                                </>
+                            )}
+                            {project.note && <p className="note">{project.note}</p>}
+                            <ul className="links-list">
+                                {project.figmalink && <li><a href={project.figmalink} target="_blank"><ion-icon name="logo-figma"></ion-icon></a></li>}
+                                {project.websitelink && <li><a href={project.websitelink} target="_blank"><ion-icon name="globe-outline"></ion-icon></a></li>}
+                                {project.externlink && <li><a href={project.externlink} target="_blank"><ion-icon name="link-outline"></ion-icon></a></li>}
+                            </ul>
+                        </div>
 
                         {/* Media Gallery */}
                         <div className="media-gallery">
