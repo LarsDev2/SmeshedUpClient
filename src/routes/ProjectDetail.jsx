@@ -4,6 +4,7 @@ import NavbarLight from "../components/NavbarLight";
 import "./ProjectDetail.css";
 import FooterLight from "../components/FooterLight";
 import NavbarWidth from "../components/NavbarWidth";
+import qs from "qs";
 
 export default function ProjectDetail() {
     const { slug } = useParams();
@@ -24,17 +25,25 @@ export default function ProjectDetail() {
 
         async function fetchProject() {
             try {
-                const res = await fetch(
-                    `${import.meta.env.VITE_STRAPI_URL}/api/projects?filters[slug][$eq]=${slug}&populate=*&publicationState=live`
+                // Use qs to encode filters properly
+                const query = qs.stringify(
+                    {
+                        filters: { slug: { $eq: slug } },
+                        populate: "*",
+                        publicationState: "live",
+                    },
+                    { encode: true }
                 );
+
+                const res = await fetch(`${import.meta.env.VITE_STRAPI_URL}/api/projects?${query}`);
                 const data = await res.json();
+
                 if (data.data && data.data.length > 0) {
                     setProject(data.data[0]);
                 } else {
                     setProject(null);
                 }
 
-                // Ensure loader is visible at least 200ms
                 const elapsed = Date.now() - startTime;
                 const remaining = Math.max(200 - elapsed, 0);
                 setTimeout(() => setLoading(false), remaining);
@@ -47,14 +56,7 @@ export default function ProjectDetail() {
         fetchProject();
     }, [slug]);
 
-    if (loading) {
-        return (
-            <div className="loader-overlay">
-                <div className="spinner"></div>
-            </div>
-        );
-    }
-
+    if (loading) return <div className="loader-overlay"><div className="spinner"></div></div>;
     if (!project) return <p>Project not found.</p>;
 
     const { name, media } = project;
@@ -67,11 +69,8 @@ export default function ProjectDetail() {
 
     const handleShare = async () => {
         const pageUrl = window.location.href;
-        const shareData = {
-            title: project.name,
-            text: project.description || "Check out this project!",
-            url: pageUrl,
-        };
+        const shareData = { title: project.name, text: project.description || "", url: pageUrl };
+
         try {
             if (navigator.share) await navigator.share(shareData);
             else if (navigator.clipboard && window.isSecureContext) {
@@ -95,9 +94,7 @@ export default function ProjectDetail() {
     return (
         <>
             <NavbarLight />
-            <div className="navbar-width">
-                <NavbarWidth />
-            </div>
+            <div className="navbar-width"><NavbarWidth /></div>
             <div className="layout layout-projects-detail">
                 <div className="project-detail--first">
                     {/* Cover */}
@@ -119,7 +116,6 @@ export default function ProjectDetail() {
                                 playsInline
                             />
                         )}
-
                         <div className="top-actions">
                             <button className="back-btn" onClick={() => navigate(-1)}>
                                 <ion-icon name="chevron-back-outline"></ion-icon>
@@ -133,67 +129,25 @@ export default function ProjectDetail() {
                     {/* Text & Media */}
                     <div className="first-text">
                         <div>
-                            <h6>
-                                {firstPart} <span className="h6-highlight">{lastWord}</span>
-                            </h6>
+                            <h6>{firstPart} <span className="h6-highlight">{lastWord}</span></h6>
                             <p className="description">{project.description}</p>
 
                             <p className="subtitle">Briefing</p>
                             <p className="project-text">
-                                {project.briefing?.split("\n").map((line, index) => (
-                                    <span key={index}>
-                                        {line}
-                                        <br />
-                                    </span>
-                                ))}
+                                {project.briefing?.split("\n").map((line, index) => <span key={index}>{line}<br /></span>)}
                             </p>
 
                             <p className="subtitle">Info</p>
                             <p className="project-text">
-                                {project.info?.split("\n").map((line, index) => (
-                                    <span key={index}>
-                                        {line}
-                                        <br />
-                                    </span>
-                                ))}
+                                {project.info?.split("\n").map((line, index) => <span key={index}>{line}<br /></span>)}
                             </p>
 
                             <p className="note">{project.note}</p>
 
                             <ul className="links-list">
-                                {project.figmalink && (
-                                    <li>
-                                        <a
-                                            className="links-list--item"
-                                            href={project.figmalink}
-                                            target="_blank"
-                                        >
-                                            <ion-icon name="logo-figma"></ion-icon>
-                                        </a>
-                                    </li>
-                                )}
-                                {project.websitelink && (
-                                    <li>
-                                        <a
-                                            className="links-list--item"
-                                            href={project.websitelink}
-                                            target="_blank"
-                                        >
-                                            <ion-icon name="globe-outline"></ion-icon>
-                                        </a>
-                                    </li>
-                                )}
-                                {project.externlink && (
-                                    <li>
-                                        <a
-                                            className="links-list--item"
-                                            href={project.externlink}
-                                            target="_blank"
-                                        >
-                                            <ion-icon name="link-outline"></ion-icon>
-                                        </a>
-                                    </li>
-                                )}
+                                {project.figmalink && <li><a className="links-list--item" href={project.figmalink} target="_blank"><ion-icon name="logo-figma"></ion-icon></a></li>}
+                                {project.websitelink && <li><a className="links-list--item" href={project.websitelink} target="_blank"><ion-icon name="globe-outline"></ion-icon></a></li>}
+                                {project.externlink && <li><a className="links-list--item" href={project.externlink} target="_blank"><ion-icon name="link-outline"></ion-icon></a></li>}
                             </ul>
                         </div>
 
@@ -205,26 +159,17 @@ export default function ProjectDetail() {
 
                                 return (
                                     <div key={item.id} className="media-item">
-                                        {isImage && (
-                                            <img
-                                                src={getMediaUrl(item)}
-                                                alt={item.alternativeText || item.name}
-                                                className="media-borders"
-                                            />
-                                        )}
-                                        {isVideo && (
-                                            <video className="media-borders" controls poster={getMediaUrl(item)}>
-                                                <source src={getMediaUrl(item)} type="video/mp4" />
-                                                Your browser does not support the video tag.
-                                            </video>
-                                        )}
+                                        {isImage && <img src={getMediaUrl(item)} alt={item.alternativeText || item.name} className="media-borders" />}
+                                        {isVideo && <video className="media-borders" controls poster={getMediaUrl(item)}>
+                                            <source src={getMediaUrl(item)} type="video/mp4" />
+                                            Your browser does not support the video tag.
+                                        </video>}
                                     </div>
                                 );
                             })}
                         </div>
                     </div>
                 </div>
-
                 <FooterLight />
             </div>
         </>
