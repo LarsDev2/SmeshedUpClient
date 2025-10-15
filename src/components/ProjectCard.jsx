@@ -1,20 +1,25 @@
 import './cards.css';
 
 function ProjectCard({ project }) {
+    const STRAPI_URL = import.meta.env.VITE_STRAPI_URL;
 
+    const getMediaUrl = (media) => {
+        if (!media) return '';
+        return media.url.startsWith('http') ? media.url : `${STRAPI_URL}${media.url}`;
+    };
 
     return (
         <div className="card">
             {project.cover && (
                 project.cover.mime.startsWith("image/") ? (
                     <img
-                        src={`${import.meta.env.VITE_STRAPI_URL}${project.cover.url}`}
+                        src={getMediaUrl(project.cover)}
                         alt={project.name}
                         className="cover"
                     />
                 ) : project.cover.mime.startsWith("video/") ? (
                     <video
-                        src={`${import.meta.env.VITE_STRAPI_URL}${project.cover.url}`}
+                        src={getMediaUrl(project.cover)}
                         className="cover"
                         autoPlay
                         loop
