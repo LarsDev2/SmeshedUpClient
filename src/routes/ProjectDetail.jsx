@@ -172,7 +172,16 @@ export default function ProjectDetail() {
                         </div>
                         <div className="media-gallery">
                             {playableMedia?.map((item) => {
-                                const fileUrl = `${import.meta.env.VITE_STRAPI_URL}${item.url}`;
+                                const getMediaUrl = (media) => {
+                                    if (!media) return '';
+
+                                    if (media.url.startsWith('http')) {
+                                        return media.url;
+                                    }
+
+                                    return `${import.meta.env.VITE_STRAPI_URL}${media.url}`;
+                                };
+
                                 const isImage = item.mime.startsWith("image/");
                                 const isVideo = item.mime === "video/mp4";
 
@@ -180,14 +189,14 @@ export default function ProjectDetail() {
                                     <div key={item.id} className="media-item">
                                         {isImage && (
                                             <img
-                                                src={fileUrl}
+                                                src={getMediaUrl}
                                                 alt={item.alternativeText || item.name}
                                                 className="media-borders"
                                             />
                                         )}
                                         {isVideo && (
-                                            <video className="media-borders" controls poster={fileUrl} >
-                                                <source src={fileUrl} type="video/mp4" />
+                                            <video className="media-borders" controls poster={getMediaUrl} >
+                                                <source src={getMediaUrl} type="video/mp4" />
                                                 Your browser does not support the video tag.
                                             </video>
                                         )}
