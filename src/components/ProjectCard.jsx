@@ -1,30 +1,26 @@
 import './cards.css';
 
 function ProjectCard({ project }) {
-    const STRAPI_URL = import.meta.env.VITE_STRAPI_URL;
-
-    const getStrapiMedia = (media, format = "url") => {
-        if (!media) return "";
-        // Use format if available
-        if (format !== "url" && media.formats?.[format]?.url) {
-            return `${import.meta.env.VITE_STRAPI_URL}${media.formats[format].url}`;
-        }
-        return `${import.meta.env.VITE_STRAPI_URL}${media.url}`;
+    // Helper to safely get media URL
+    const getMediaUrl = (media) => {
+        if (!media) return '';
+        // Cloudinary URLs are already absolute, but fallback to url if needed
+        return media.url || '';
     };
-
 
     return (
         <div className="card">
+            {/* Cover */}
             {project.cover && (
-                project.cover.mime.startsWith("image/") ? (
+                project.cover.mime.startsWith('image/') ? (
                     <img
-                        src={getStrapiMedia(project.cover)}
-                        alt={project.name}
+                        src={getMediaUrl(project.cover)}
+                        alt={project.cover.alternativeText || project.name}
                         className="cover"
                     />
-                ) : project.cover.mime.startsWith("video/") ? (
+                ) : project.cover.mime.startsWith('video/') ? (
                     <video
-                        src={getStrapiMedia(project.cover)}
+                        src={getMediaUrl(project.cover)}
                         className="cover"
                         autoPlay
                         loop
@@ -34,6 +30,29 @@ function ProjectCard({ project }) {
                 ) : null
             )}
 
+            {/* Media Array */}
+            {project.media?.length > 0 && project.media.map((m) => (
+                m.mime.startsWith('image/') ? (
+                    <img
+                        key={m.id}
+                        src={getMediaUrl(m)}
+                        alt={m.alternativeText || project.name}
+                        className="cover"
+                    />
+                ) : m.mime.startsWith('video/') ? (
+                    <video
+                        key={m.id}
+                        src={getMediaUrl(m)}
+                        className="cover"
+                        autoPlay
+                        loop
+                        muted
+                        playsInline
+                    />
+                ) : null
+            ))}
+
+            {/* Categories */}
             {project.categories?.length > 0 && (
                 <ul className="categories">
                     {project.categories.map((cat) => (
@@ -43,7 +62,6 @@ function ProjectCard({ project }) {
                     ))}
                 </ul>
             )}
-
         </div>
     );
 }
