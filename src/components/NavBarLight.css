@@ -1,0 +1,40 @@
+nav.navbar.navbar-light {
+    background-color: rgba(226, 227, 237, 0.7);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+}
+
+.navbar.navbar-light .nav-link {
+    color: var(--color-darkindigo);
+    filter: none;
+}
+
+
+
+
+.navbar.navbar-light label svg rect {
+    fill: var(--color-darkindigo);
+    transition: all 0.4s ease;
+    transform-origin: 10px 50%;
+}
+
+nav ul:last-child.open {
+    display: flex;
+    flex-direction: column;
+}
+
+@media (min-width:768px) {
+
+
+    nav.navbar.navbar-light {
+        background-color: transparent;
+        backdrop-filter: blur(0px);
+        -webkit-backdrop-filter: blur(0px);
+    }
+
+    nav.navbar.navbar-light .navbar-middletext {
+        color: var(--background-color-dark);
+    }
+
+
+}

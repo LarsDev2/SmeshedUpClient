@@ -1,0 +1,43 @@
+@font-face {
+    font-family: "RockedAlt";
+    src: url("../assets/Rocked-Regular-ALT.otf") format("opentype");
+    font-weight: normal;
+    font-style: normal;
+}
+
+:root {
+
+    --font-family: "poppins", sans-serif;
+    --font-family-tag: "RockedAlt";
+
+    --fs-xs: .8rem;
+    --fs-s: 1.1rem;
+    --fs-m: 1.5rem;
+    --fs-h3: 2.5rem;
+    --fs-l: 3.3rem;
+    --fs-xl: 5rem;
+
+    --step--8: clamp(0.7675rem, 0.7437rem + 0.1058vw, 0.8389rem);
+    --step--7: clamp(0.921rem, 0.8784rem + 0.189vw, 1.0486rem);
+    --step--6: clamp(1.1052rem, 1.0366rem + 0.3045vw, 1.3107rem);
+    --step--5: clamp(1.3262rem, 1.2221rem + 0.4625vw, 1.6384rem);
+    --step--4: clamp(1.5914rem, 1.4392rem + 0.6764vw, 2.048rem);
+    --step--3: clamp(1.9097rem, 1.693rem + 0.9634vw, 2.56rem);
+    --step--2: clamp(2.2917rem, 1.9889rem + 1.3457vw, 3.2rem);
+    --step--1: clamp(2.75rem, 2.3333rem + 1.8519vw, 4rem);
+    --step-0: clamp(3.3rem, 2.7333rem + 2.5185vw, 5rem);
+    --step-1: clamp(3.96rem, 3.1967rem + 3.3926vw, 6.25rem);
+
+    --fs-button: 1.2rem;
+
+    --background-color-dark: #000413;
+    --background-color-light: #DFE2E5;
+    --color-purple: #6059A2;
+    --color-blue: #78C6DD;
+    --color-orange: #E2756D;
+    --color-white: #ffffff;
+    --color-darkindigo: #1B1E35;
+    --color-dof: #4A5375;
+
+    --border-radius: 1rem;
+}
