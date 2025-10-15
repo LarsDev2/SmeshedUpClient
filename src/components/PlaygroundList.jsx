@@ -11,23 +11,32 @@ function PlaygroundList({ playgrounds }) {
     const [hoveredIndex, setHoveredIndex] = useState(null);
 
     useEffect(() => {
+        if (hoveredIndex !== null) {
+            gsap.to(`.project-grid-item:nth-child(${hoveredIndex + 1})`, {
+                scale: 0.9,
+                duration: 0.1,
+                ease: "power3.out"
+            });
+        } else {
+            gsap.utils.toArray(".project-grid-item").forEach(item => {
+                gsap.to(item, { scale: 1, duration: 0.1, ease: "power3.out" });
+            });
+        }
+    }, [hoveredIndex]);
+
+    useEffect(() => {
         const ctx = gsap.context(() => {
-            gsap.utils.toArray(".project-grid-item").forEach((item) => {
+            gsap.utils.toArray(".project-grid-item").forEach(item => {
                 gsap.from(item, {
-                    y: 50,           // slide up from below
-                    opacity: 0,      // start invisible
+                    y: 50,
+                    opacity: 0,
                     duration: 0.8,
                     ease: "power3.out",
-                    scrollTrigger: {
-                        trigger: item,      // animate when this item enters viewport
-                        start: "top 70%",   // adjust where it starts
-                        toggleActions: "play none none none",
-                    },
+                    scrollTrigger: { trigger: item, start: "top 70%", toggleActions: "play none none none" }
                 });
             });
         });
-
-        return () => ctx.revert(); // cleanup
+        return () => ctx.revert();
     }, []);
 
     return (
