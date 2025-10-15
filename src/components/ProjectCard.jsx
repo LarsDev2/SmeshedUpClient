@@ -3,12 +3,7 @@ import './cards.css';
 function ProjectCard({ project }) {
     const getMediaUrl = (media) => {
         if (!media) return '';
-
-        if (media.url.startsWith('http')) {
-            return media.url;
-        }
-        
-        return `${import.meta.env.VITE_STRAPI_URL}${media.url}`;
+        return media.url.startsWith('http') ? media.url : `${import.meta.env.VITE_STRAPI_URL}${media.url}`;
     };
 
     return (
@@ -32,13 +27,10 @@ function ProjectCard({ project }) {
                 ) : null
             )}
 
-            {/* Categories */}
             {project.categories?.length > 0 && (
                 <ul className="categories">
-                    {project.categories.map((cat) => (
-                        <li key={cat.id} className="category-item">
-                            {cat.course}
-                        </li>
+                    {project.categories.map(cat => (
+                        <li key={cat.id} className="category-item">{cat.course}</li>
                     ))}
                 </ul>
             )}

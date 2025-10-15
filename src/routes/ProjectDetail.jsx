@@ -11,7 +11,6 @@ export default function ProjectDetail() {
     const [loading, setLoading] = useState(true);
     const navigate = useNavigate();
 
-    // Safe media URL helper
     const getMediaUrl = (media) => {
         if (!media) return "";
         return media.url.startsWith("http")
@@ -44,38 +43,18 @@ export default function ProjectDetail() {
     const words = name.split(" ");
     const lastWord = words.pop();
     const firstPart = words.join(" ");
-
     const playableMedia = media?.filter(m => m.mime.startsWith("image/") || m.mime === "video/mp4");
 
     return (
         <>
             <NavbarLight />
-            <div className="navbar-width">
-                <NavbarWidth />
-            </div>
+            <div className="navbar-width"><NavbarWidth /></div>
 
             <div className="layout layout-projects-detail">
                 <div className="project-detail--first">
-                    {/* Cover */}
                     <div className="cover-wrapper">
-                        {project.cover?.mime?.startsWith("image/") && (
-                            <img
-                                src={getMediaUrl(project.cover)}
-                                alt={project.cover.alternativeText || project.name}
-                                className="cover-img"
-                            />
-                        )}
-                        {project.cover?.mime?.startsWith("video/") && (
-                            <video
-                                src={getMediaUrl(project.cover)}
-                                className="cover-img"
-                                autoPlay
-                                loop
-                                muted
-                                playsInline
-                            />
-                        )}
-
+                        {project.cover?.mime?.startsWith("image/") && <img src={getMediaUrl(project.cover)} alt={project.cover.alternativeText || project.name} className="cover-img" />}
+                        {project.cover?.mime?.startsWith("video/") && <video src={getMediaUrl(project.cover)} className="cover-img" autoPlay loop muted playsInline />}
                         <div className="top-actions">
                             <button className="back-btn" onClick={() => navigate(-1)}>
                                 <ion-icon name="chevron-back-outline"></ion-icon>
@@ -83,29 +62,12 @@ export default function ProjectDetail() {
                         </div>
                     </div>
 
-                    {/* Text & Media */}
                     <div className="first-text">
                         <h6>{firstPart} <span className="h6-highlight">{lastWord}</span></h6>
                         <p className="description">{project.description}</p>
 
-                        {project.briefing && (
-                            <>
-                                <p className="subtitle">Briefing</p>
-                                <p className="project-text">
-                                    {project.briefing.split("\n").map((line, i) => <span key={i}>{line}<br /></span>)}
-                                </p>
-                            </>
-                        )}
-
-                        {project.info && (
-                            <>
-                                <p className="subtitle">Info</p>
-                                <p className="project-text">
-                                    {project.info.split("\n").map((line, i) => <span key={i}>{line}<br /></span>)}
-                                </p>
-                            </>
-                        )}
-
+                        {project.briefing && <><p className="subtitle">Briefing</p><p className="project-text">{project.briefing.split("\n").map((l, i) => <span key={i}>{l}<br /></span>)}</p></>}
+                        {project.info && <><p className="subtitle">Info</p><p className="project-text">{project.info.split("\n").map((l, i) => <span key={i}>{l}<br /></span>)}</p></>}
                         {project.note && <p className="note">{project.note}</p>}
 
                         <ul className="links-list">
@@ -114,23 +76,11 @@ export default function ProjectDetail() {
                             {project.externlink && <li><a href={project.externlink} target="_blank"><ion-icon name="link-outline"></ion-icon></a></li>}
                         </ul>
 
-                        {/* Media Gallery */}
                         <div className="media-gallery">
                             {playableMedia?.map(item => (
                                 <div key={item.id} className="media-item">
-                                    {item.mime.startsWith("image/") && (
-                                        <img
-                                            src={getMediaUrl(item)}
-                                            alt={item.alternativeText || item.name}
-                                            className="media-borders"
-                                        />
-                                    )}
-                                    {item.mime === "video/mp4" && (
-                                        <video className="media-borders" controls poster={getMediaUrl(item)}>
-                                            <source src={getMediaUrl(item)} type="video/mp4" />
-                                            Your browser does not support the video tag.
-                                        </video>
-                                    )}
+                                    {item.mime.startsWith("image/") && <img src={getMediaUrl(item)} alt={item.alternativeText || item.name} className="media-borders" />}
+                                    {item.mime === "video/mp4" && <video className="media-borders" controls poster={getMediaUrl(item)}><source src={getMediaUrl(item)} type="video/mp4" />Your browser does not support the video tag.</video>}
                                 </div>
                             ))}
                         </div>

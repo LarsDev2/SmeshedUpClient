@@ -18,33 +18,24 @@ function ProjectList({ projects }) {
                 ease: "power3.out"
             });
         } else {
-            gsap.utils.toArray(".project-grid-item").forEach((item) => {
-                gsap.to(item, {
-                    scale: 1,
-                    duration: 0.1,
-                    ease: "power3.out"
-                });
+            gsap.utils.toArray(".project-grid-item").forEach(item => {
+                gsap.to(item, { scale: 1, duration: 0.1, ease: "power3.out" });
             });
         }
     }, [hoveredIndex]);
 
     useEffect(() => {
         const ctx = gsap.context(() => {
-            gsap.utils.toArray(".project-grid-item").forEach((item) => {
+            gsap.utils.toArray(".project-grid-item").forEach(item => {
                 gsap.from(item, {
                     y: 50,
                     opacity: 0,
                     duration: 0.8,
                     ease: "power3.out",
-                    scrollTrigger: {
-                        trigger: item,
-                        start: "top 70%",
-                        toggleActions: "play none none none",
-                    },
+                    scrollTrigger: { trigger: item, start: "top 70%", toggleActions: "play none none none" }
                 });
             });
         });
-
         return () => ctx.revert();
     }, []);
 
@@ -61,8 +52,7 @@ function ProjectList({ projects }) {
                     `}
                 >
                     <Link
-                        // FIXED: lowercase /projects to match route
-                        to={`/projects/${project.slug}`}
+                        to={`/projects/${project.slug}`} // ✅ lowercase fixes 404
                         className="block h-full"
                         onMouseEnter={() => setHoveredIndex(i)}
                         onMouseLeave={() => setHoveredIndex(null)}
