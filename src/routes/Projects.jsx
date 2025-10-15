@@ -55,7 +55,7 @@ function Projects() {
             <div className='navbar-width'>
                 <NavbarWidth />
             </div>
-            <div className="layout-projects">
+            <div className="layout layout-projects">
                 <div className="center">
                     <h2>Projects</h2>
                     <img
