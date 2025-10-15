@@ -1,15 +1,23 @@
 import { useParams, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import NavbarLight from "../components/NavbarLight";
-import './ProjectDetail.css';
+import "./ProjectDetail.css";
 import FooterLight from "../components/FooterLight";
 import NavbarWidth from "../components/NavbarWidth";
 
 export default function ProjectDetail() {
     const { slug } = useParams();
     const [project, setProject] = useState(null);
-    const [loading, setLoading] = useState(true); // loader state
+    const [loading, setLoading] = useState(true);
     const navigate = useNavigate();
+
+    // Helper to get correct media URL
+    const getMediaUrl = (media) => {
+        if (!media) return "";
+        return media.url.startsWith("http")
+            ? media.url
+            : `${import.meta.env.VITE_STRAPI_URL}${media.url}`;
+    };
 
     useEffect(() => {
         const startTime = Date.now();
@@ -17,12 +25,16 @@ export default function ProjectDetail() {
         async function fetchProject() {
             try {
                 const res = await fetch(
-                    `${import.meta.env.VITE_STRAPI_URL}/api/projects?filters[slug][$eq]=${slug}&populate=*`
+                    `${import.meta.env.VITE_STRAPI_URL}/api/projects?filters[slug][$eq]=${slug}&populate=*&publicationState=live`
                 );
                 const data = await res.json();
-                setProject(data.data[0]); // first matching project
+                if (data.data && data.data.length > 0) {
+                    setProject(data.data[0]);
+                } else {
+                    setProject(null);
+                }
 
-                // Ensure loader stays visible at least 1 second
+                // Ensure loader is visible at least 200ms
                 const elapsed = Date.now() - startTime;
                 const remaining = Math.max(200 - elapsed, 0);
                 setTimeout(() => setLoading(false), remaining);
@@ -35,7 +47,6 @@ export default function ProjectDetail() {
         fetchProject();
     }, [slug]);
 
-    // Show full-screen loader while loading
     if (loading) {
         return (
             <div className="loader-overlay">
@@ -50,7 +61,6 @@ export default function ProjectDetail() {
     const words = name.split(" ");
     const lastWord = words.pop();
     const firstPart = words.join(" ");
-
     const playableMedia = media?.filter(
         (m) => m.mime.startsWith("image/") || m.mime === "video/mp4"
     );
@@ -62,7 +72,6 @@ export default function ProjectDetail() {
             text: project.description || "Check out this project!",
             url: pageUrl,
         };
-
         try {
             if (navigator.share) await navigator.share(shareData);
             else if (navigator.clipboard && window.isSecureContext) {
@@ -86,29 +95,29 @@ export default function ProjectDetail() {
     return (
         <>
             <NavbarLight />
-            <div className='navbar-width'>
+            <div className="navbar-width">
                 <NavbarWidth />
             </div>
             <div className="layout layout-projects-detail">
                 <div className="project-detail--first">
+                    {/* Cover */}
                     <div className="cover-wrapper">
-                        {project.cover && (
-                            project.cover.mime.startsWith("image/") ? (
-                                <img
-                                    src={`${import.meta.env.VITE_STRAPI_URL}${project.cover.url}`}
-                                    alt={project.name}
-                                    className="cover-img"
-                                />
-                            ) : project.cover.mime.startsWith("video/") ? (
-                                <video
-                                    src={`${import.meta.env.VITE_STRAPI_URL}${project.cover.url}`}
-                                    className="cover-img"
-                                    autoPlay
-                                    loop
-                                    muted
-                                    playsInline
-                                />
-                            ) : null
+                        {project.cover && project.cover.mime.startsWith("image/") && (
+                            <img
+                                src={getMediaUrl(project.cover)}
+                                alt={project.cover.alternativeText || project.name}
+                                className="cover-img"
+                            />
+                        )}
+                        {project.cover && project.cover.mime.startsWith("video/") && (
+                            <video
+                                src={getMediaUrl(project.cover)}
+                                className="cover-img"
+                                autoPlay
+                                loop
+                                muted
+                                playsInline
+                            />
                         )}
 
                         <div className="top-actions">
@@ -121,67 +130,76 @@ export default function ProjectDetail() {
                         </div>
                     </div>
 
+                    {/* Text & Media */}
                     <div className="first-text">
                         <div>
                             <h6>
                                 {firstPart} <span className="h6-highlight">{lastWord}</span>
                             </h6>
                             <p className="description">{project.description}</p>
+
                             <p className="subtitle">Briefing</p>
                             <p className="project-text">
-                                {project.briefing.split("\n").map((line, index) => (
+                                {project.briefing?.split("\n").map((line, index) => (
                                     <span key={index}>
                                         {line}
                                         <br />
                                     </span>
                                 ))}
                             </p>
+
                             <p className="subtitle">Info</p>
                             <p className="project-text">
-                                {project.info.split("\n").map((line, index) => (
+                                {project.info?.split("\n").map((line, index) => (
                                     <span key={index}>
                                         {line}
                                         <br />
                                     </span>
                                 ))}
                             </p>
+
                             <p className="note">{project.note}</p>
+
                             <ul className="links-list">
                                 {project.figmalink && (
                                     <li>
-                                        <a className="links-list--item" href={project.figmalink} target="_blank">
+                                        <a
+                                            className="links-list--item"
+                                            href={project.figmalink}
+                                            target="_blank"
+                                        >
                                             <ion-icon name="logo-figma"></ion-icon>
                                         </a>
                                     </li>
                                 )}
                                 {project.websitelink && (
                                     <li>
-                                        <a className="links-list--item" href={project.websitelink} target="_blank" >
+                                        <a
+                                            className="links-list--item"
+                                            href={project.websitelink}
+                                            target="_blank"
+                                        >
                                             <ion-icon name="globe-outline"></ion-icon>
                                         </a>
                                     </li>
                                 )}
                                 {project.externlink && (
                                     <li>
-                                        <a className="links-list--item" href={project.externlink} target="_blank" >
+                                        <a
+                                            className="links-list--item"
+                                            href={project.externlink}
+                                            target="_blank"
+                                        >
                                             <ion-icon name="link-outline"></ion-icon>
                                         </a>
                                     </li>
                                 )}
                             </ul>
                         </div>
+
+                        {/* Media Gallery */}
                         <div className="media-gallery">
                             {playableMedia?.map((item) => {
-                                const getMediaUrl = (media) => {
-                                    if (!media) return '';
-
-                                    if (media.url.startsWith('http')) {
-                                        return media.url;
-                                    }
-
-                                    return `${import.meta.env.VITE_STRAPI_URL}${media.url}`;
-                                };
-
                                 const isImage = item.mime.startsWith("image/");
                                 const isVideo = item.mime === "video/mp4";
 
@@ -189,14 +207,14 @@ export default function ProjectDetail() {
                                     <div key={item.id} className="media-item">
                                         {isImage && (
                                             <img
-                                                src={getMediaUrl}
+                                                src={getMediaUrl(item)}
                                                 alt={item.alternativeText || item.name}
                                                 className="media-borders"
                                             />
                                         )}
                                         {isVideo && (
-                                            <video className="media-borders" controls poster={getMediaUrl} >
-                                                <source src={getMediaUrl} type="video/mp4" />
+                                            <video className="media-borders" controls poster={getMediaUrl(item)}>
+                                                <source src={getMediaUrl(item)} type="video/mp4" />
                                                 Your browser does not support the video tag.
                                             </video>
                                         )}
