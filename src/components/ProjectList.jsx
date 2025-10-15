@@ -18,7 +18,6 @@ function ProjectList({ projects }) {
                 ease: "power3.out"
             });
         } else {
-            // reset all items when no hover
             gsap.utils.toArray(".project-grid-item").forEach((item) => {
                 gsap.to(item, {
                     scale: 1,
@@ -33,13 +32,13 @@ function ProjectList({ projects }) {
         const ctx = gsap.context(() => {
             gsap.utils.toArray(".project-grid-item").forEach((item) => {
                 gsap.from(item, {
-                    y: 50,           // slide up from below
-                    opacity: 0,      // start invisible
+                    y: 50,
+                    opacity: 0,
                     duration: 0.8,
                     ease: "power3.out",
                     scrollTrigger: {
-                        trigger: item,      // trigger animation when this specific item enters viewport
-                        start: "top 70%",   // adjust where it starts
+                        trigger: item,
+                        start: "top 70%",
                         toggleActions: "play none none none",
                     },
                 });
@@ -50,20 +49,20 @@ function ProjectList({ projects }) {
     }, []);
 
     return (
-
         <div className="project-grid">
             {projects.map((project, i) => (
                 <div
                     key={project.id}
                     className={`project-grid-item 
-            ${i % 8 === 0 ? "big" : ""}
-            ${i % 6 === 0 ? "tall" : ""}
-            ${i % 4 === 0 ? "wide" : ""}
-            ${hoveredIndex !== null && hoveredIndex !== i ? "grayscale" : ""}
-          `}
+                        ${i % 8 === 0 ? "big" : ""}
+                        ${i % 6 === 0 ? "tall" : ""}
+                        ${i % 4 === 0 ? "wide" : ""}
+                        ${hoveredIndex !== null && hoveredIndex !== i ? "grayscale" : ""}
+                    `}
                 >
                     <Link
-                        to={`/Projects/${project.slug}`}
+                        // FIXED: lowercase /projects to match route
+                        to={`/projects/${project.slug}`}
                         className="block h-full"
                         onMouseEnter={() => setHoveredIndex(i)}
                         onMouseLeave={() => setHoveredIndex(null)}
