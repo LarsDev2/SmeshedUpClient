@@ -210,7 +210,9 @@ function Home() {
           <div className='playground-text'>
             <span>playground</span>
             <p>“Creative place where my visions and ideas come together”</p>
-            <img src={whitearrow} alt="arrow svg" />
+            <button className='secondary-button'><Link className='Link' to="/playground">
+              <img src={whitearrow} alt="arrow svg" />
+            </Link></button>
           </div>
         </div>
 
