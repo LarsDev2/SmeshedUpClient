@@ -4,8 +4,14 @@ function ProjectCard({ project }) {
     // Helper to safely get media URL
     const getMediaUrl = (media) => {
         if (!media) return '';
-        // Cloudinary URLs are already absolute, but fallback to url if needed
-        return media.url || '';
+
+        // If media.url starts with http, it's already absolute (Cloudinary)
+        if (media.url.startsWith('http')) {
+            return media.url;
+        }
+
+        // Otherwise, prepend your Strapi URL (for local uploads)
+        return `${import.meta.env.VITE_STRAPI_URL}${media.url}`;
     };
 
     return (
@@ -31,7 +37,7 @@ function ProjectCard({ project }) {
             )}
 
             {/* Media Array */}
-            {project.media?.length > 0 && project.media.map((m) => (
+            {project.media?.length > 0 && project.media.map((m) =>
                 m.mime.startsWith('image/') ? (
                     <img
                         key={m.id}
@@ -50,7 +56,7 @@ function ProjectCard({ project }) {
                         playsInline
                     />
                 ) : null
-            ))}
+            )}
 
             {/* Categories */}
             {project.categories?.length > 0 && (
