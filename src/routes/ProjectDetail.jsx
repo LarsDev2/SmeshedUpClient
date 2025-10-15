@@ -23,7 +23,7 @@ export default function ProjectDetail() {
         const fetchProject = async () => {
             try {
                 const res = await fetch(
-                    `${import.meta.env.VITE_STRAPI_URL.replace(/\/$/, "")}/api/projects?filters[slug][$eq]=${slug}&populate[cover]=*&populate[media]=*`
+                    `${import.meta.env.VITE_STRAPI_URL.replace(/\/$/, "")}/api/projects?filters[slug][$eq]=${slug}&populate=*`
                 );
                 const data = await res.json();
                 setProject(data?.data?.[0] || null);
@@ -34,6 +34,7 @@ export default function ProjectDetail() {
                 setLoading(false);
             }
         };
+
         fetchProject();
     }, [slug]);
 
