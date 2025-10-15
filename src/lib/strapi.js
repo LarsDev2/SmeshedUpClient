@@ -13,10 +13,9 @@ const fetchApi = async (
     endpoint = endpoint.slice(1);
   }
 
-  const url = new URL(
-    `${import.meta.env.VITE_STRAPI_URL}/api/${endpoint}${query ? `?${qs.stringify(query, { encode: false })}` : ``
-    }`
-  );
+  const cleanEndpoint = endpoint.replace(/^\/+/, ""); // removes leading slash
+  const url = new URL(`${import.meta.env.VITE_STRAPI_URL}/api/${cleanEndpoint}${query ? `?${qs.stringify(query, { encode: false })}` : ""}`);
+
 
   const res = await fetch(url.toString(), options);
   let data = await res.json();
