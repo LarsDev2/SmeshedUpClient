@@ -147,7 +147,7 @@ export default function ProjectDetail() {
                             {project.note && <p className="note">{project.note}</p>}
                             <ul className="links-list">
                                 {project.figmalink && <li><a href={project.figmalink} target="_blank"><ion-icon name="logo-figma"></ion-icon></a></li>}
-                                {project.websitelink && <li><a href={project.websitelink} target="_blank"><ion-icon name="globe-outline" style={{ color: "red", fontSize: "28px" }}></ion-icon></a></li>}
+                                {project.websitelink && <li><a href={project.websitelink} target="_blank"><ion-icon name="globe-outline" style={{ color: "#1B1E35", fontSize: "45px" }}></ion-icon></a></li>}
                                 {project.externlink && <li><a href={project.externlink} target="_blank"><ion-icon name="link-outline"></ion-icon></a></li>}
                             </ul>
                         </div>
