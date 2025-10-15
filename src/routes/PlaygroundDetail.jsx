@@ -169,9 +169,10 @@ export default function PlaygroundDetail() {
                         </div>
                     </div>
                 </div>
+
+                <FooterLight />
             </div>
 
-            <FooterLight />
         </>
     );
 }

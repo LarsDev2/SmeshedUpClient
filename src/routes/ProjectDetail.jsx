@@ -176,9 +176,10 @@ export default function ProjectDetail() {
                         </div>
                     </div>
                 </div>
+
+                <FooterLight />
             </div>
 
-            <FooterLight />
         </>
     );
 }
