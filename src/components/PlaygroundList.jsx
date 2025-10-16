@@ -12,13 +12,13 @@ function PlaygroundList({ playgrounds }) {
 
     useEffect(() => {
         if (hoveredIndex !== null) {
-            gsap.to(`.project-grid-item:nth-child(${hoveredIndex + 1})`, {
+            gsap.to(`.playground-grid-item:nth-child(${hoveredIndex + 1})`, {
                 scale: 0.9,
                 duration: 0.1,
                 ease: "power3.out"
             });
         } else {
-            gsap.utils.toArray(".project-grid-item").forEach(item => {
+            gsap.utils.toArray(".playground-grid-item").forEach(item => {
                 gsap.to(item, { scale: 1, duration: 0.1, ease: "power3.out" });
             });
         }
@@ -26,7 +26,7 @@ function PlaygroundList({ playgrounds }) {
 
     useEffect(() => {
         const ctx = gsap.context(() => {
-            gsap.utils.toArray(".project-grid-item").forEach(item => {
+            gsap.utils.toArray(".playground-grid-item").forEach(item => {
                 gsap.from(item, {
                     y: 50,
                     opacity: 0,
@@ -44,7 +44,7 @@ function PlaygroundList({ playgrounds }) {
             {playgrounds.map((playground, i) => (
                 <div
                     key={playground.id}
-                    className={`project-grid-item 
+                    className={`playground-grid-item 
             ${i % 8 === 0 ? "big" : ""}
             ${i % 6 === 0 ? "tall" : ""}
             ${i % 4 === 0 ? "wide" : ""}
