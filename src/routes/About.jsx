@@ -197,8 +197,9 @@ function About() {
 
             <div className="layout layout-about">
                 <div className="about-intro--text">
-                    <p>My name is Lars, and I’m a 20 year old Belgian student at <span className="bold">Devine</span>.<br /><br />
-                        My hobbies are travelling, football, skiing and listening to music. Especially “drum and bass”, it’s a lifestyle.</p>
+                    <p>  Hi, I’m Lars. A 20-year-old Belgian student at <span className="bold">Devine</span>.<br /><br />
+                        I’m passionate about 3D design and using visuals to make a real <span className="bold">impact</span>, not just to look good.<br /><br />
+                        Outside of design, I love travelling, playing football, skiing, and discovering new music.</p>
                     <img className="line-element--about" src={line} alt="svg line element" />
                     <button className='primary'><Link className='Link-secondary letschat-button' to="https://www.instagram.com/smeshedup/">Let's chat<img src={arrow} alt="Arrow svg." /></Link></button>
                 </div>
