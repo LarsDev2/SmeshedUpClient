@@ -32,7 +32,7 @@ function PlaygroundList({ playgrounds }) {
                     opacity: 0,
                     duration: 0.8,
                     ease: "power3.out",
-                    scrollTrigger: { trigger: item, start: "top 50%", toggleActions: "play none none none" }
+                    scrollTrigger: { trigger: item, start: "top 70%", toggleActions: "play none none none" }
                 });
             });
         });
