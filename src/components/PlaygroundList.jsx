@@ -40,7 +40,7 @@ function PlaygroundList({ playgrounds }) {
     }, []);
 
     return (
-        <div className="project-grid">
+        <div className="playground-grid">
             {playgrounds.map((playground, i) => (
                 <div
                     key={playground.id}
