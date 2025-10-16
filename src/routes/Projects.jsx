@@ -41,7 +41,7 @@ function Projects() {
         return (
             <div className="loader-overlay">
                 <div className="spinner"></div>
-                <p>loading projects, this can take a minute...</p>
+                <p>loading projects, <br />this can take a minute...</p>
             </div>
         );
     }
