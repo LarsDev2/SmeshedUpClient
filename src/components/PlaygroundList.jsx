@@ -36,7 +36,7 @@ function PlaygroundList({ playgrounds }) {
                     ease: "power3.out",
                     scrollTrigger: {
                         trigger: item,
-                        start: "top 70%",
+                        start: "top 50%",
                         toggleActions: "play none none none"
                     }
                 });
