@@ -152,6 +152,11 @@
         margin-bottom: 3rem;
     }
 
+    .playground-grid {
+        width: 90vw;
+        margin-bottom: 3rem;
+    }
+
 }
 
 @media (min-width:1082px) {
