@@ -25,6 +25,8 @@ function PlaygroundList({ playgrounds }) {
     }, [hoveredIndex]);
 
     useEffect(() => {
+        if (!playgrounds?.length) return; // wait until data exists
+
         const ctx = gsap.context(() => {
             gsap.utils.toArray(".playground-grid-item").forEach(item => {
                 gsap.from(item, {
@@ -32,12 +34,18 @@ function PlaygroundList({ playgrounds }) {
                     opacity: 0,
                     duration: 0.8,
                     ease: "power3.out",
-                    scrollTrigger: { trigger: item, start: "top 70%", toggleActions: "play none none none" }
+                    scrollTrigger: {
+                        trigger: item,
+                        start: "top 70%",
+                        toggleActions: "play none none none"
+                    }
                 });
             });
         });
+
         return () => ctx.revert();
-    }, []);
+    }, [playgrounds]); // 👈 add dependency
+
 
     return (
         <div className="playground-grid">
