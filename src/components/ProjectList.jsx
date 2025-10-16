@@ -12,13 +12,13 @@ function ProjectList({ projects }) {
 
     useEffect(() => {
         if (hoveredIndex !== null) {
-            gsap.to(`.playground-grid-item:nth-child(${hoveredIndex + 1})`, {
+            gsap.to(`.project-grid-item:nth-child(${hoveredIndex + 1})`, {
                 scale: 0.9,
                 duration: 0.1,
                 ease: "power3.out"
             });
         } else {
-            gsap.utils.toArray(".playground-grid-item").forEach(item => {
+            gsap.utils.toArray(".project-grid-item").forEach(item => {
                 gsap.to(item, { scale: 1, duration: 0.1, ease: "power3.out" });
             });
         }
@@ -26,13 +26,13 @@ function ProjectList({ projects }) {
 
     useEffect(() => {
         const ctx = gsap.context(() => {
-            gsap.utils.toArray(".playground-grid-item").forEach(item => {
+            gsap.utils.toArray(".project-grid-item").forEach(item => {
                 gsap.from(item, {
                     y: 50,
                     opacity: 0,
                     duration: 0.8,
                     ease: "power3.out",
-                    scrollTrigger: { trigger: item, start: "top 50%", toggleActions: "play none none none" }
+                    scrollTrigger: { trigger: item, start: "top 70%", toggleActions: "play none none none" }
                 });
             });
         });
@@ -44,7 +44,7 @@ function ProjectList({ projects }) {
             {projects.map((project, i) => (
                 <div
                     key={project.id}
-                    className={`playground-grid-item 
+                    className={`project-grid-item 
                         ${i % 8 === 0 ? "big" : ""}
                         ${i % 6 === 0 ? "tall" : ""}
                         ${i % 4 === 0 ? "wide" : ""}
