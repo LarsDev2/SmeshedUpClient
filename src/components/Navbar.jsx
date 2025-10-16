@@ -21,9 +21,9 @@ function Navbar() {
     }, [active]);
 
     const links = [
-        { name: "Projects", path: "/Projects" },
-        { name: "Playground", path: "/Playground" },
-        { name: "About", path: "/About" }
+        { name: "Projects", path: "/projects" },
+        { name: "Playground", path: "/playground" },
+        { name: "About", path: "/about" }
     ];
 
 

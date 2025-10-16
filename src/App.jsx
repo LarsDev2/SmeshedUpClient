@@ -15,11 +15,11 @@ export default function App() {
             <ScrollToTop />
             <Routes>
                 <Route path="/" element={<Home />} />
-                <Route path="/About" element={<About />} />
-                <Route path="/Playground" element={<Playground />} />
-                <Route path="/Playground/:slug" element={<PlaygroundDetail />} />
-                <Route path="/Projects" element={<Projects />} />
-                <Route path="/Projects/:slug" element={<ProjectDetail />} />
+                <Route path="/about" element={<About />} />
+                <Route path="/playground" element={<Playground />} />
+                <Route path="/playground/:slug" element={<PlaygroundDetail />} />
+                <Route path="/projects" element={<Projects />} />
+                <Route path="/projects/:slug" element={<ProjectDetail />} />
             </Routes>
         </>
     );

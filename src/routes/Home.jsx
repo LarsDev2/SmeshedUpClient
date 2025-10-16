@@ -175,7 +175,7 @@ function Home() {
             </div>
           </div>
           <div className='project-button--wrapper'>
-            <button className='primary'><Link className='Link-secondary' to="/Projects/street-soccer-event">Full project</Link><img src={arrow} alt="Arrow svg." /> </button>
+            <button className='primary'><Link className='Link-secondary' to="/projects/street-soccer-event">Full project</Link><img src={arrow} alt="Arrow svg." /> </button>
             <button className='secondary-button'><Link className='Link' to="/projects">
               All projects
             </Link><img src={externlink} alt="Extern link icon." /></button>
