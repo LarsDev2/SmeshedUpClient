@@ -48,6 +48,8 @@ function Home() {
 
   }, []); // 🔹 Preload effect runs only once
 
+
+
   // 🔹 Run GSAP animations only after loading is finished
   useEffect(() => {
     if (loading) return; // prevents GSAP from running before DOM is ready
@@ -119,23 +121,15 @@ function Home() {
         <NavbarWidth />
       </div>
       <div className='hero'>
-        <span className='testimonials--link'>Real testimonials from clients</span>
-        <div className='grid-item--1'>
-          <h1>Code, <br /> Design & 3D</h1>
-          <span className='tagline'>I don't do boring.</span>
+        <div className='grid-item--1 title'>
+          <h1>2D & 3D <span>visual</span> design</h1>
         </div>
-        <video className='updown' autoPlay loop muted playsInline preload="auto" poster={imgfallback}>
-          <source src={finalrenderios} type="video/mp4" />
-        </video>
-        <div className='contact-wrapper'>
-          <div className='contact-flex'>
-            <img className='contact-avatar' src={avatar} alt="photo of me" />
-            <div>
-              <p className='contact-name'>Lars Pieters</p>
-              <p className='contact-company'>A.K.A. SmeshedUp</p>
-            </div>
-          </div>
-          <button className='primary contact-button--home'><Link className='letschat-button' to="https://www.instagram.com/smeshedup/">Let's chat <img src={arrow} alt="arrow svg" /></Link> </button>
+        <div className='text'>
+          <p>A twenty-something with a passion for <span className="bold">3D, 2D and motion.</span> Creating visuals for you!</p>
+          <p>⸺ Contact me if you have questions!</p>
+        </div>
+        <div className='image'>
+          <img src={avatar} alt="" />
         </div>
       </div>
 

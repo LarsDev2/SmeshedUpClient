@@ -16,6 +16,15 @@ body,
   overflow-x: hidden;
 }
 
+h1 {
+  font-family: var(--font-family-title);
+}
+
+h1 span {
+  font-family: var(--font-family);
+  font-style: italic;
+}
+
 .Link {
   text-decoration: none;
   color: var(--color-white);
@@ -82,7 +91,8 @@ button {
 }
 
 h3 {
-  font-size: var(--step--3);
+  font-family: var(--font-family-title);
+  font-size: var(--step--2);
   text-transform: uppercase;
   line-height: .5;
   font-weight: 500;
@@ -91,13 +101,13 @@ h3 {
 }
 
 h3 span {
-  background: linear-gradient(90deg, var(--color-orange), var(--color-purple), var(--color-blue));
-  filter: drop-shadow(0 0 0.75rem var(--color-orange));
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
+  font-family: var(--font-family);
+  color: white;
+  font-weight: 100;
+  font-style: italic;
   display: inline-block;
   padding: 0.5em 0;
+  letter-spacing: 10px;
 }
 
 .text-center {
@@ -108,6 +118,7 @@ p {
   line-height: 1.3;
   font-size: var(--step--6);
   font-weight: 300;
+  color: var(--color-text);
 }
 
 .light {
@@ -149,7 +160,7 @@ h6 {
 }
 
 .bold {
-  color: var(--color-blue);
+  color: var(--background-color-light);
   font-weight: 600;
 }
 
@@ -211,6 +222,7 @@ h6 {
 
 .navbar-width {
   position: fixed;
+  font-family: var(--font-family-title);
   bottom: 5vh;
   left: 50%;
   transform: translateX(-50%);
@@ -230,7 +242,7 @@ h6 {
   }
 
   .layout {
-    padding: 0rem 3rem 3rem 3rem;
+    padding: 0rem 5rem 3rem 5rem;
     gap: 10rem;
   }
 

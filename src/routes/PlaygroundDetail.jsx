@@ -1,7 +1,7 @@
 import { useParams, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
-import NavbarLight from "../components/NavbarLight";
-import FooterLight from "../components/FooterLight";
+import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
 import NavbarWidth from "../components/NavbarWidth";
 import "./ProjectDetail.css";
 
@@ -83,7 +83,7 @@ export default function PlaygroundDetail() {
 
     return (
         <>
-            <NavbarLight />
+            <Navbar />
             <div className="navbar-width">
                 <NavbarWidth />
             </div>
@@ -169,7 +169,7 @@ export default function PlaygroundDetail() {
                     </div>
                 </div>
 
-                <FooterLight />
+                <Footer />
             </div>
 
         </>

@@ -1,7 +1,6 @@
-import NavbarLight from "../components/NavbarLight"
-import FooterLight from "../components/FooterLight"
+import Navbar from "../components/Navbar"
+import Footer from "../components/Footer"
 import './Playground.css'
-import playgroundimg from "../assets/playgroundimg.png"
 import arrow from '../assets/arrow.svg'
 import line from '../assets/line.svg'
 import PlaygroundList from "../components/PlaygroundList"
@@ -32,26 +31,16 @@ function Playground() {
 
     return (
         <>
-            <NavbarLight />
+            <Navbar />
 
             <div className='navbar-width'>
                 <NavbarWidth />
             </div>
             <div className='layout layout-playground'>
                 <div className='layout-section  '>
-                    <h2 className="keyboard">
-                        <span className="key">P</span>
-                        <span className="key">L</span>
-                        <span className="key">A</span>
-                        <span className="key">Y</span>
-                        <span className="key">G</span>
-                        <span className="key">R</span>
-                        <span className="key">O</span>
-                        <span className="key">U</span>
-                        <span className="key">N</span>
-                        <span className="key">D</span>
-                    </h2>
-                    <img className="full-width-img playground-img" src={playgroundimg} alt="" />
+                    <div className="center text-center">
+                        <h3 >The <span>playground</span></h3>
+                    </div>
                     <div className="layout-section--playground">
                         <img className='line-element--playground' src={line} alt="svg line element" />
                         <p>My creative ideas, and visions gather in this place</p>
@@ -65,7 +54,7 @@ function Playground() {
                 <p className="light">These might not all be finished projects... Some are just experiments. That’s why I call this my playground. It’s important to keep experimenting and nurturing your <span className="bold-dark">creative side!</span></p>
 
 
-                <FooterLight />
+                <Footer />
             </div>
         </>
     )

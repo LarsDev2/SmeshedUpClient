@@ -28,11 +28,12 @@ h4 {
 }
 
 .category-item {
+    font-family: var(--font-family-title);
     text-decoration: none;
     color: var(--color-darkindigo);
     font-weight: 500;
     border-radius: 10px;
-    background-color: rgba(110, 66, 253, 0.27);
+    background-color: rgba(0, 0, 0, 0.27);
     color: var(--color-white);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);

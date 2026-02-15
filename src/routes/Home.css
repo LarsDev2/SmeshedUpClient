@@ -1,78 +1,101 @@
-.hero {
-  height: fit-content;
-  background: #000E2E;
-  background: linear-gradient(169deg, rgba(0, 14, 46, 1) 0%, rgba(0, 4, 17, 1) 100%);
-  background-color: white;
-  padding: 6rem 0rem 0rem 0rem;
-  overflow: hidden;
+h1 {
+  font-size: var(--step-0);
+  line-height: .8;
+  font-weight: 500;
+  max-width: 8ch;
+}
 
+.hero {
   display: grid;
-  justify-items: center;
-  grid-template-columns: 100vw;
-  grid-template-rows: auto min-content auto;
+  /* Occupies the full height of the screen */
+  height: 70vh;
+
+  /* Col 1: flexible | Col 2: image column - prevent collapse with minmax */
+  grid-template-columns: fit-content minmax(280px, 40%);
+  grid-template-rows: auto 1fr;
+
+  grid-template-areas:
+    "title image"
+    "text  image";
+
+  gap: 0;
+  row-gap: 50px;
+  padding: 8rem 5rem 7rem 5rem;
+  /* Removing gap ensures the image touches the edges if desired */
+}
+
+.grid-item--1.title {
+  grid-area: title;
+  /* Adjust padding for your layout */
+}
+
+.text {
+  grid-area: text;
+  max-width: 50ch;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.text p:nth-child(2) {
+  font-style: italic;
+}
+
+.image {
+  grid-area: image;
+  /* This ensures the container itself fills the height of both rows */
+  height: 100%;
+  width: 100%;
+}
+
+/* Ensure the image container occupies the right column and spans both rows */
+.image {
+  grid-column: 2;
+  grid-row: 1 / span 2;
+  align-self: center;
+  justify-self: end;
+  z-index: 1;
+  clip-path: polygon(25% 0%, 100% 0%, 100% 100%, 25% 100%, 0% 50%);
 
 }
 
-h1 {
-  text-transform: uppercase;
-  font-size: var(--step-0);
-  line-height: .7;
-  text-align: center;
+.image img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  /* Spans the full height of the grid */
+
+  /* Magic ingredient: makes image fill space without distortion */
+  object-fit: cover;
+  object-position: center;
+}
+
+/* Responsive: On mobile, the height usually needs to be auto 
+   so content isn't cramped, and the image can sit below/above */
+@media (max-width: 768px) {
+  .hero {
+    min-height: auto;
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "title"
+      "image"
+      "text";
+  }
+
+  .image img {
+    height: 300px;
+    /* Fixed height for mobile so it doesn't take the whole screen */
+  }
 }
 
 .grid-item--1 {
   grid-column: 1;
   grid-row: 1;
   z-index: 2;
-  text-align: center;
 }
 
-.tagline {
-  font-family: var(--font-family-tag);
-  font-size: var(--step--3);
-  font-weight: bold;
-  background: linear-gradient(90deg, var(--color-orange), var(--color-purple));
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  display: inline-block;
-  transform: rotate(-5.37deg);
-  padding: 0.5em 0;
-  margin-top: -10px;
-}
-
-.hero video {
-  grid-column: 1;
-  grid-row: 1 / span 2;
-  z-index: 1;
-  width: 140%;
-  object-fit: contain;
-}
-
-.hero video img {
-  grid-column: 1;
-  grid-row: 1 / span 2;
-  z-index: 1;
-  width: 140%;
-  object-fit: contain;
-}
-
-.updown {
-  filter: drop-shadow(-15px 20px 20px #00000e);
-}
-
-.contact-wrapper {
-  display: flex;
-  align-items: center;
-  width: 90vw;
-  justify-content: space-between;
-  grid-row-start: 2;
-  padding-bottom: 1rem;
-  grid-row-end: 3;
-  grid-column: 1;
-  align-items: end;
-  z-index: 3;
-}
+/* Responsive: stack vertically on small screens */
+@media (max-width: 700px) {}
 
 .contact-flex {
   display: flex;
@@ -170,6 +193,7 @@ h1 {
 
 
 .carousel {
+  font-family: var(--font-family-title);
   width: 100vw;
   overflow: hidden;
   margin: 0 auto;
@@ -383,6 +407,7 @@ h1 {
 
 .latest-project--title {
   text-transform: uppercase;
+  font-family: var(--font-family-title);
   color: var(--color-dof);
   font-size: var(--fs-s);
 }
@@ -465,13 +490,6 @@ h1 {
 
 
 @media (min-width:768px) {
-  .hero video {
-    width: 100%;
-  }
-
-  .hero video img {
-    width: 100%;
-  }
 
   .contact-button--home {
     display: none
@@ -531,40 +549,6 @@ h1 {
     font-size: 2rem;
   }
 
-  .hero {
-    grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: fit-content;
-    justify-items: left;
-  }
-
-  .grid-item--1 {
-    grid-column: 1;
-    grid-row: 2;
-  }
-
-  .hero video {
-    width: 70%;
-    grid-column: 1 /span 2;
-    grid-row: 1 /span 3;
-    place-self: end;
-    margin-top: -250px;
-  }
-
-  .hero video img {
-    width: 70%;
-  }
-
-  .contact-wrapper {
-    width: fit-content;
-    height: fit-content;
-    grid-row: 3;
-    margin-bottom: 10rem;
-  }
-
-  h1 {
-    text-align: left;
-    max-width: 8ch;
-  }
 
   .testimonials--link {
     display: block;
@@ -573,17 +557,5 @@ h1 {
     height: fit-content;
   }
 
-  .testimonials--link,
-  .grid-item--1,
-  .contact-wrapper {
-    margin-left: 10rem;
-  }
 
-  .tagline {
-    margin-top: -120px;
-  }
-
-  .contact-flex {
-    gap: 1rem;
-  }
 }

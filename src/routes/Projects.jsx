@@ -1,10 +1,10 @@
 import ProjectList from "../components/ProjectList";
 import { useEffect, useState } from "react";
 import fetchApi from "../lib/strapi";
-import NavbarLight from "../components/NavbarLight";
+import Navbar from "../components/Navbar";
 import "./Projects.css";
 import line from "../assets/line.svg";
-import FooterLight from "../components/FooterLight";
+import Footer from "../components/Footer";
 import NavbarWidth from "../components/NavbarWidth";
 
 function Projects() {
@@ -52,13 +52,13 @@ function Projects() {
 
     return (
         <>
-            <NavbarLight />
+            <Navbar />
             <div className='navbar-width'>
                 <NavbarWidth />
             </div>
             <div className="layout-projects">
                 <div className="center">
-                    <h2>Projects</h2>
+                    <h3>My <span>projects</span></h3>
                     <img
                         className="line-element--playground"
                         src={line}
@@ -85,7 +85,7 @@ function Projects() {
                     <ProjectList projects={filteredProjects} />
                 </div>
 
-                <FooterLight />
+                <Footer />
             </div>
         </>
     );

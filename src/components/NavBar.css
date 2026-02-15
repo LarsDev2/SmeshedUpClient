@@ -16,7 +16,6 @@ nav {
     -webkit-backdrop-filter: blur(0px);
     backdrop-filter: blur(0px);
     transition: .5s ease-in-out;
-    background-color: rgb(4, 9, 39);
 }
 
 nav.menu-open {
@@ -103,7 +102,6 @@ nav ul:last-child {
 .nav-link {
     text-decoration: none;
     color: var(--color-white);
-    font-family: var(--font-family);
     font-weight: 600;
     font-size: 2.5rem;
     text-transform: uppercase;
@@ -223,9 +221,7 @@ nav ul:last-child {
         font-weight: 600;
     }
 
-    .hero {
-        padding: 8rem 0 0 0;
-    }
+    /* hero padding override removed so hero responsive rules are managed in Home.css */
 
     .navbar {
         padding: 2rem;

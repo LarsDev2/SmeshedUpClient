@@ -7,8 +7,9 @@
 
 :root {
 
-    --font-family: "poppins", sans-serif;
-    --font-family-tag: "RockedAlt";
+    --font-family: "PT Serif", serif;
+    --font-family-title: "Poppins", sans-serif;
+
 
     --fs-xs: .8rem;
     --fs-s: 1.1rem;
@@ -30,14 +31,15 @@
 
     --fs-button: 1.2rem;
 
-    --background-color-dark: #000413;
-    --background-color-light: #DFE2E5;
+    --background-color-dark: #000000;
+    --background-color-light: #ffffff;
     --color-purple: #6059A2;
     --color-blue: #78C6DD;
     --color-orange: #E2756D;
     --color-white: #ffffff;
-    --color-darkindigo: #1B1E35;
-    --color-dof: #4A5375;
+    --color-darkindigo: #404040;
+    --color-dof: #2f2f2f;
+    --color-text: #d8d8d8;
 
     --border-radius: 1rem;
 }
